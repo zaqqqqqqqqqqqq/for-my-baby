@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffe6e6;
+        }
+        .container {
+            margin-top: 50px;
+            padding: 20px;
+        }
+        .heart {
+            font-size: 50px;
+            cursor: pointer;
+            position: absolute;
+        }
+        #question {
+            display: none;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .btn-container {
+            display: none;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            background: pink;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        #yesBtn {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hey, my love ❤️</h1>
+        <p>There are so many things I love about you, and I don’t even know where to begin. Your eyes—they are my favorite place to get lost in. Your smile—it lights up even my darkest days. The way you laugh, the way you care, the way you just exist—you are perfect in every way, and I wouldn’t change a single thing about you. You make life feel magical, and every moment with you is something I cherish.</p>
+        <p>There’s something I’ve been meaning to ask properly for a long time... but first, click on the hearts!</p>
+        <div class="heart" id="heart">❤️</div>
+        <div id="question">Will you be my girlfriend? 🥰</div>
+        <div class="btn-container">
+            <button class="btn" id="yesBtn">Yes! 💖</button>
+            <button class="btn" id="noBtn">No 😢</button>
+        </div>
+    </div>
+
+    <audio id="song" src="https://your-audio-url.com/no-one-noticed.mp3"></audio>
+
+    <script>
+        const heart = document.getElementById("heart");
+        const question = document.getElementById("question");
+        const btnContainer = document.querySelector(".btn-container");
+        const yesBtn = document.getElementById("yesBtn");
+        const noBtn = document.getElementById("noBtn");
+        const song = document.getElementById("song");
+        let heartClicks = 0;
+
+        function moveHeart() {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
+            heart.style.left = `${x}px`;
+            heart.style.top = `${y}px`;
+        }
+
+        heart.addEventListener("click", () => {
+            heartClicks++;
+            if (heartClicks < 3) {
+                moveHeart();
+            } else if (heartClicks === 3) {
+                heart.style.display = "none"; // Heart disappears after 3 clicks
+                question.style.display = "block"; // Display the question
+                btnContainer.style.display = "flex"; // Display the buttons
+                song.play(); // Play the song
+            }
+        });
+
+        noBtn.addEventListener("click", () => {
+            yesBtn.style.transform = `scale(${1 + (heartClicks - 3) * 0.2})`;
+            if (heartClicks > 6) {
+                question.innerHTML = "You are my world, my heart, my greatest love. I could never imagine life without you, because you are the most beautiful part of it. Every moment with you is a gift, and I want nothing more than to hold your hand through everything. I love you, always and forever. 💖";
+                btnContainer.style.display = "none";
+            }
+        });
+
+        yesBtn.addEventListener("click", () => {
+            document.body.innerHTML = `<div class='container'><h1>I love you beyond words ❤️</h1><p>You are my everything. Your eyes are my favorite view, your smile is my greatest happiness, and your heart is the most beautiful thing I've ever known. I don’t just love you—I adore you, I cherish you, and I want to spend forever showing you just how much you mean to me. 💖</p></div>`;
+        });
+
+        moveHeart();
+    </script>
+</body>
+</html>
